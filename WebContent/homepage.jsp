@@ -143,7 +143,7 @@
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title">Update Account</h4>
 						</div>
-						<form method="POST" action="UpdateAccount" role="form">
+						<form method="POST" action="AddAccountDetails" role="form">
 							<div class="form-group">
 								<label class="control-label" for="email">Enter the name</label>
 								<input id="nameID" name="name" type="text"

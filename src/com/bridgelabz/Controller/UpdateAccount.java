@@ -23,19 +23,11 @@ public class UpdateAccount extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		String accountId = req.getParameter("id");
 		System.out.println("accountId----> "+accountId);
-		JSONObject obj=BankDAO.updateAccount(Integer.parseInt(accountId));
-		out.print(obj.toJSONString());
-		System.out.println("---up----->"+obj.get("name"));
-	
-		String name= (String) obj.get("name");
-		String email= (String) obj.get("email");
-		String city= (String) obj.get("city");
-		String accountnumber= (String) obj.get("accountnumber");
-		
-		
 		int pid = Integer.parseInt(accountId);
-		System.out.println("iddd---> "+pid);
-		BankDAO.editAccount(pid,name,email,city,accountnumber);
+		JSONObject obj=BankDAO.updateAccount(pid);
+		out.print(obj.toJSONString());
+		System.out.println("------>"+obj.get("name"));
+		BankDAO.editAccount(pid);
 		
 	}
 }

@@ -116,18 +116,19 @@ public class BankDAO {
 		return obj;
 	}
 
-	public static void editAccount(int id, String name, String email, String city, String accountnumber) {
+	public static void editAccount(int id) {
 		PreparedStatement pstmt = null;
 		Connection con = null;
 		try {
 			con = UserDAO.getConnection();
 			String query = "update addaccount  set name=?, email=? ,city=?, accountnumber=? where id=?";
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, name);
-			pstmt.setString(2, email);
-			pstmt.setString(3, city);
-			pstmt.setString(4, accountnumber);
-			pstmt.setInt(5, id);
+			pstmt.setInt(1, id);
+			AccountDetails account = new AccountDetails();
+			pstmt.setString(2, account.getName());
+			pstmt.setString(3, account.getEmail());
+			pstmt.setString(4, account.getCity());
+			pstmt.setString(5, account.getAccountnumber());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
