@@ -22,11 +22,20 @@ public class UpdateAccount extends HttpServlet {
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
 		String accountId = req.getParameter("id");
+		System.out.println("accountId----> "+accountId);
 		JSONObject obj=BankDAO.updateAccount(Integer.parseInt(accountId));
 		out.print(obj.toJSONString());
-		int pid = Integer.parseInt(accountId);
-		BankDAO.editAccount(pid);
+		System.out.println("---up----->"+obj.get("name"));
+	
+		String name= (String) obj.get("name");
+		String email= (String) obj.get("email");
+		String city= (String) obj.get("city");
+		String accountnumber= (String) obj.get("accountnumber");
 		
+		
+		int pid = Integer.parseInt(accountId);
+		System.out.println("iddd---> "+pid);
+		BankDAO.editAccount(pid,name,email,city,accountnumber);
 		
 	}
 }

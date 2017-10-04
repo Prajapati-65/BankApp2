@@ -28,6 +28,7 @@ public class AccountView extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		String email =(String) session.getAttribute("email");
+		
 		String id = BankDAO.id(email);
 		PrintWriter printWriter = resp.getWriter();
 		printWriter.println("<h1>Account List</h1>");

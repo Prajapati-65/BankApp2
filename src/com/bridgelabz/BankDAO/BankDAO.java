@@ -51,7 +51,7 @@ public class BankDAO {
 		return status;
 	}
 
-	public static List<AccountDetails> getAllAccount(String city,String userId) {
+	public static List<AccountDetails> getAllAccount(String city, String userId) {
 		List<AccountDetails> list = new ArrayList<AccountDetails>();
 		try {
 			Connection con = UserDAO.getConnection();
@@ -69,7 +69,7 @@ public class BankDAO {
 				list.add(account);
 			}
 			con.close();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -116,21 +116,30 @@ public class BankDAO {
 		return obj;
 	}
 
-	public static void editAccount(int id) {
+	public static void editAccount(int id, String name, String email, String city, String accountnumber) {
+		PreparedStatement pstmt = null;
+		Connection con = null;
 		try {
-			Connection con = UserDAO.getConnection();
+			con = UserDAO.getConnection();
 			String query = "update addaccount  set name=?, email=? ,city=?, accountnumber=? where id=?";
-			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			pstmt.setString(3, city);
+			pstmt.setString(4, accountnumber);
 			pstmt.setInt(5, id);
-			AccountDetails account = new AccountDetails();
-			pstmt.setString(1, account.getName());
-			pstmt.setString(2, account.getEmail());
-			pstmt.setString(3, account.getCity());
-			pstmt.setString(4, account.getAccountnumber());
 			pstmt.executeUpdate();
-			con.close();
-		} catch (Exception ex) {
-			ex.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

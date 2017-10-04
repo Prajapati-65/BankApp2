@@ -22,9 +22,9 @@ public class AddAccountDetails extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		String emailid=(String) session.getAttribute("email");
+		
 		String id = BankDAO.id(emailid);
 		session.setAttribute("id", id);
-		
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
 		String title = ("<br>" + "Your account is successful" + "</br>");
