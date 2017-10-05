@@ -29,7 +29,9 @@ public class Login extends HttpServlet {
 		UserDAO userdao = new UserDAO();
 		String name = userdao.loginUser(email, password);
 
+		
 		System.out.println("User name-->" + name);
+		
 		if (name != "false") {
 			HttpSession session = req.getSession();
 			session.setAttribute("name", name);

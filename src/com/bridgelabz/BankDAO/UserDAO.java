@@ -21,24 +21,6 @@ public class UserDAO {
 		return connection;
 	}
 
-	public String loginUser(String email, String password) {
-		try {
-			Connection connection = UserDAO.getConnection();
-			PreparedStatement pstmt = connection
-					.prepareStatement("select * from registration where email=? and password = ?");
-			pstmt.setString(1, email);
-			pstmt.setString(2, password);
-			ResultSet resultSet = pstmt.executeQuery();
-			System.out.println("Execute Statement :");
-			if (resultSet.next()) 
-			{
-				return resultSet.getString("name");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "false";
-	}
 
 	public static int saveRegistration(User user) {
 		int status = 0;
@@ -59,6 +41,26 @@ public class UserDAO {
 			ex.printStackTrace();
 		}
 		return status;
+	}
+
+	
+	public String loginUser(String email, String password) {
+		try {
+			Connection connection = UserDAO.getConnection();
+			PreparedStatement pstmt = connection
+					.prepareStatement("select * from registration where email=? and password = ?");
+			pstmt.setString(1, email);
+			pstmt.setString(2, password);
+			ResultSet resultSet = pstmt.executeQuery();
+			System.out.println("Execute Statement :");
+			if (resultSet.next()) 
+			{
+				return resultSet.getString("name");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "false";
 	}
 
 	

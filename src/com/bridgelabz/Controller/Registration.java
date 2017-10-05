@@ -31,6 +31,8 @@ public class Registration extends HttpServlet {
 		user.setPassword(password);
 		user.setMobilenumber(number);
 		
+		
+		
 		if(UserDAO.saveRegistration(user) > 0)
 		{	
 			out.print("<p>Record Saved Successfully</p>");
